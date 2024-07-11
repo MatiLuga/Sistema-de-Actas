@@ -29,7 +29,6 @@
         <h2 class="mb-4">Iniciar Sesión</h2>
 
         <form method="POST" action="{{ route('login') }}">
-            @csrf <!-- Token CSRF de Laravel -->
 
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>

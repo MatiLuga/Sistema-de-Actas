@@ -8,43 +8,25 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     // Mostrar el formulario de inicio de sesión
-    public function showLoginForm()
+    public function index()
     {
-        return view('auth.login');
+        //$users = User::paginate(4);
+        //return view('users.index')->with('users', $users);
     }
 
-    // Procesar el inicio de sesión
-    public function login(Request $request)
+    public function show($id)
     {
-        // Validar los datos del formulario
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Intentar autenticar al usuario
-        if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
-            $request->session()->regenerate();
-
-            return redirect()->intended('/dashboard');
-        }
-
-        // Autenticación fallida
-        return back()->withErrors([
-            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
-        ]);
+        return $id;
     }
 
-    // Cerrar sesión del usuario
-    public function logout(Request $request)
+    public function create()
     {
-        Auth::logout();
+        return view('users.create');
+    }
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+    public function store(Request $request, UserRequest $validator)
+    {
+        $user = new User;
+        $user->name = $request->name;
     }
 }

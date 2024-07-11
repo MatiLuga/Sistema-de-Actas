@@ -18,9 +18,9 @@ Route::get('/', function () {
 //Route::resource('actas', ActaController::class);
 //Route::resource('login', UserController::class);
 // Rutas para la autenticación
-Route::get('/login', 'UserController@showLoginForm')->name('login'); // Mostrar formulario de inicio de sesión
-Route::post('/login', 'UserController@login'); // Procesar inicio de sesión
-Route::post('/logout', 'UserController@logout')->name('logout'); // Procesar cierre de sesión
+Route::get('/login', 'AuthController@showLoginForm')->name('login'); // Mostrar formulario de inicio de sesión
+Route::post('/login', 'AuthController@login'); // Procesar inicio de sesión
+Route::post('/logout', 'AuthController@logout')->name('logout'); // Procesar cierre de sesión
 
 
 Route::get('/actas', 'ActaController@index');

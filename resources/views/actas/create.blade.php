@@ -35,7 +35,8 @@
         
         <form method="POST" action="{{ route('actas.create') }}">
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            {‌{ csrf_field() }}
+
 
             <h3>Entra al edificio</h3>
 
