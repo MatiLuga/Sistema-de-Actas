@@ -33,8 +33,9 @@
     <div class="container">
         <h2 class="mb-4">Crear Acta</h2>
         
-        <form method="POST" action="/actas">
-            @csrf <!-- Token CSRF de Laravel -->
+        <form method="POST" action="{{ route('actas.create') }}">
+
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
             <h3>Entra al edificio</h3>
 

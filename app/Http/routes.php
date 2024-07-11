@@ -24,7 +24,7 @@ Route::post('/logout', 'UserController@logout')->name('logout'); // Procesar cie
 
 
 Route::get('/actas', 'ActaController@index');
-Route::get('/actas/create', 'ActaController@create')->name('crearActa');
-Route::post('/actas', 'ActaController@store');
+Route::get('/actas/create', 'ActaController@create')->name('actas.create');
+Route::post('/actas', 'ActaController@store')->name('actas.store');
 // Puedes definir más rutas para otras acciones del controlador según sea necesario
 

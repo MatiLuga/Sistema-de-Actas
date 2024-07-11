@@ -58,7 +58,7 @@
                 <div class="title">Bienvenido al Sistema de Actas</div>
 
                 <a href="{{ route('login') }}" class="btn btn-primary button">Iniciar Sesión</a>
-                <a href="{{ route('crearActa') }}" class="btn btn-primary button">Crear Acta</a>
+                <a href="{{ route('actas.create') }}" class="btn btn-primary button">Crear Acta</a>
 
             </div>
         </div>

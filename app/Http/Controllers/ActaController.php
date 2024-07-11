@@ -39,24 +39,21 @@ class ActaController extends Controller
     {
         // Valida los datos del formulario
         $request->validate([
-            'nombre' => 'required|string',
-            'apellido' => 'required|string',
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
             'horario_entrada' => 'required|date',
             'texto' => 'required|string',
-            'creado_por' => 'required|string',
+            'creado_por' => 'required|string|max:255',
         ]);
 
         // Crea una nueva instancia de Acta con los datos recibidos
-        $acta = new Acta([
+        Acta::create([
             'nombre' => $request->input('nombre'),
             'apellido' => $request->input('apellido'),
             'horario_entrada' => $request->input('horario_entrada'),
             'texto' => $request->input('texto'),
             'creado_por' => $request->input('creado_por'),
         ]);
-
-        // Guarda el acta en la base de datos
-        $acta->save();
 
         // Redirige a una ruta o devuelve una respuesta
         return redirect('/actas')->with('success', 'Acta creada correctamente');
