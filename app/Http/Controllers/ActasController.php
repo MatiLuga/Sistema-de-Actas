@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
 use App\Exports\ActasExport;
-use App\Acta; // Importa el modelo Acta si lo tienes definido
+use App\Acta;
 
 class ActasController extends Controller
 {
@@ -71,7 +70,8 @@ class ActasController extends Controller
 
     public function export()
     {
-        return Excel::download(new ActasExport, 'actas.xlsx');
+        $export = new ActasExport();
+        return $export->export();
     }
 
 }   

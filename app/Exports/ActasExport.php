@@ -3,12 +3,16 @@
 namespace App\Exports;
 
 use App\Acta;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Facades\Excel;
 
-class ActasExport implements FromCollection
+class ActasExport
 {
-    public function collection()
+    public function export()
     {
-        return Acta::all();
+        Excel::create('actas', function($excel) {
+            $excel->sheet('Sheet1', function($sheet) {
+                $sheet->fromArray(Acta::all()->toArray());
+            });
+        })->download('xlsx');
     }
 }
