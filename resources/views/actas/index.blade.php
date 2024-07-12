@@ -1,94 +1,32 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Actas</title>
+@extends('layouts.app')
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-
-        .btn-create {
-            margin-bottom: 20px;
-        }
-
-        .acta-info {
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Sistema de Actas
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Iniciar Sesión</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Cerrar Sesión</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-        <h1>Lista de Actas</h1>
-        <a href="{{ route('actas.create') }}" class="btn btn-primary btn-create">Crear Nueva Acta</a>
-        <ul>
-            @foreach($actas as $acta)
-                <li>
-                    <div class="acta-info">
-                        <span><strong>Nombre:</strong> {{ $acta->nombre }} {{ $acta->apellido }}</span>
-                        <span><strong>Horario de Entrada:</strong> {{ $acta->horario_entrada }}</span>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
+@section('content')
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Actas</h1>
+    <div class="mb-3 d-flex justify-content-between align-items-center">
+        <a href="{{ route('actas.create') }}" class="btn btn-primary">Crear Acta</a>
+        <a href="{{ route('actas.export') }}" class="btn btn-success mb-3">Exportar a Excel</a>
     </div>
-
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>
-</html>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><a href="{{ route('actas.index', ['sort' => 'nombre']) }}">Nombre</a></th>
+                    <th><a href="{{ route('actas.index', ['sort' => 'horario_entrada']) }}">Horario de Entrada</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($actas as $acta)
+                    <tr>
+                        <td>{{ $acta->nombre }} {{ $acta->apellido }}</td>
+                        <td>{{ $acta->horario_entrada }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="mt-4">
+        {{ $actas->appends(request()->query())->links() }}
+    </div>
+</div>
+@endsection
