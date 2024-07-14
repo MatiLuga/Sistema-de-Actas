@@ -25,6 +25,9 @@ Route::get('/actas', 'ActasController@index')->name('actas.index');
 Route::get('/actas/create', 'ActasController@create')->name('actas.create');
 Route::post('/actas', 'ActasController@store')->name('actas.store');
 Route::get('actas/export', 'ActasController@export')->name('actas.export');
+Route::delete('/actas/{acta}', 'ActasController@destroy')->name('actas.destroy');
+
+
 // Puedes definir más rutas para otras acciones del controlador según sea necesario
 Route::auth();
 

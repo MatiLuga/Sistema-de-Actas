@@ -68,6 +68,12 @@ class ActasController extends Controller
         
     }
 
+    public function destroy(Acta $acta)
+    {
+        $acta->delete();
+        return redirect('/actas')->with('success', 'Acta eliminada correctamente');
+    }
+
     public function export()
     {
         $export = new ActasExport();
