@@ -23,9 +23,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><a href="{{ route('actas.index', ['sort' => 'nombre']) }}">Nombre</a></th>
-                    <th><a href="{{ route('actas.index', ['sort' => 'horario_entrada']) }}">Horario de Entrada</a></th>
+                    <th><a href="{{ route('actas.index', ['sort' => 'nombre', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">Nombre</a></th>
+                    <th><a href="{{ route('actas.index', ['sort' => 'horario_entrada', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">Horario de Entrada</a></th>
                     <th>Acciones</th> <!-- Agrega esta columna para las acciones -->
+                    <th>Firma</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,12 +36,13 @@
                         <td>{{ $acta->horario_entrada }}</td>
                         <td>
                             <!-- Formulario para eliminar el acta -->
-                            <form action="{{ route('actas.destroy', $acta) }}" method="POST">
+                            <form action="{{ route('actas.destroy', $acta->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </for>
                         </td>
+                        <td>{{ $acta->creado_por }}</td>
                     </tr>
                 @endforeach
             </tbody>

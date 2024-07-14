@@ -27,12 +27,15 @@
                 <textarea id="texto" name="texto" class="form-control" rows="5" required>{{ old('texto') }}</textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="display: flex; justify-content: center;">
                 <label for="creado_por">Firma:</label>
-                <input type="text" id="creado_por" name="creado_por" class="form-control" value="{{ old('creado_por') }}" required>
+                <input type="text" id="creado_por" name="creado_por" class="form-control" value="{{ auth()->user()->name }}" readonly style="width: 15% ; text-align: center;">
             </div>
         
-            <button type="submit" class="btn btn-primary">Guardar</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" style="display: block; margin: 0 auto;">Guardar</button>
+            </div>
+            
         </form>
     </div>
 @endsection

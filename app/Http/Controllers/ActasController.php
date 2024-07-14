@@ -16,19 +16,14 @@ class ActasController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->get('search'); // Obtiene el valor de la consulta de búsqueda enviada desde la URL
-        $sort = $request->get('sort', 'horario_entrada'); // Ordenar por 'horario_entrada' por defecto
+        $sort = $request->get('sort', 'nombre');
+        $direction = $request->get('direction', 'asc');
 
-        $actas = Acta::query() // consulta sobre el modelo Acta
-            // Aplico filtros
-            ->when($search, function($query, $search) {
-                $query->where('nombre', 'like', "%$search%") // filtros por nombre
-                      ->orWhere('apellido', 'like', "%$search%"); // filtros por apellido
-            })
-            ->orderBy($sort)
-            ->paginate(10);
+        $actas = Acta::orderBy($sort, $direction)->paginate(10);
 
-        return view('actas.index', compact('actas'));
+        return view('actas.index', [
+            'actas' => $actas,
+        ]);
     }
 
 
@@ -68,8 +63,9 @@ class ActasController extends Controller
         
     }
 
-    public function destroy(Acta $acta)
+    public function destroy($id)
     {
+        $acta = Acta::findOrFail($id);
         $acta->delete();
         return redirect('/actas')->with('success', 'Acta eliminada correctamente');
     }
