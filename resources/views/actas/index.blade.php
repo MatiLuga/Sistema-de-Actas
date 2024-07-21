@@ -41,6 +41,7 @@
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </for>
+                            <a href="{{ route('actas.show', $acta) }}" class="btn btn-info btn-sm">Detalle</a>
                         </td>
                         <td>{{ $acta->creado_por }}</td>
                     </tr>

@@ -63,6 +63,13 @@ class ActasController extends Controller
         
     }
 
+    public function show(Acta $acta)
+    {
+        return view('actas.show', [
+            'acta' => $acta,
+        ]);
+    }
+
     public function destroy($id)
     {
         $acta = Acta::findOrFail($id);
