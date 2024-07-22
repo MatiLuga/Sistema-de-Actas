@@ -25,7 +25,7 @@ Route::get('/actas', 'ActasController@index')->name('actas.index');
 Route::get('/actas/create', 'ActasController@create')->name('actas.create');
 Route::post('/actas', 'ActasController@store')->name('actas.store');
 Route::get('actas/export', 'ActasController@export')->name('actas.export');
-Route::delete('/actas/{id}', 'ActasController@destroy')->name('actas.destroy');
+Route::delete('/actas/destroy/{acta}', 'ActasController@destroy')->name('actas.destroy');
 Route::get('/actas/show/{acta}', 'ActasController@show')->name('actas.show');
 
 

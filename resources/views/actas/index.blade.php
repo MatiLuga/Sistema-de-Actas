@@ -36,12 +36,12 @@
                         <td>{{ $acta->horario_entrada }}</td>
                         <td>
                             <!-- Formulario para eliminar el acta -->
-                            <form action="{{ route('actas.destroy', $acta->id) }}" method="POST">
+                            <form action="{{ route('actas.destroy', $acta) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                             </for>
-                            <a href="{{ route('actas.show', $acta) }}" class="btn btn-info btn-sm">Detalle</a>
+                            <a href="{{ route('actas.show', $acta) }}" class="btn btn-info btn-sm">Detalle</a>  
                         </td>
                         <td>{{ $acta->creado_por }}</td>
                     </tr>

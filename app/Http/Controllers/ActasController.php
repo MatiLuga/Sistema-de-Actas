@@ -68,13 +68,14 @@ class ActasController extends Controller
         return view('actas.show', [
             'acta' => $acta,
         ]);
+
     }
 
-    public function destroy($id)
+    public function destroy(Acta $acta) 
     {
-        $acta = Acta::findOrFail($id);
+        $name = $acta->nombre;
         $acta->delete();
-        return redirect('/actas')->with('success', 'Acta eliminada correctamente');
+        return redirect('/actas')->with('success', $name);
     }
 
     public function export()
